@@ -1,0 +1,21 @@
+{
+    "version": "2.0.0",
+    "configurations": [        
+        {
+            "name": "(Windows) Launch",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${fileDirname}\\${fileBasenameNoExtension}.exe", // Use the compiled executable
+            "args": [],
+            "stopAtEntry": true, // Stop at the entry point of the program
+            "cwd": "${fileDirname}",
+            "environment": [
+                {
+                    "name": "PATH",
+                    "value": "C:\\ICU\\icu4c-77_1-Win64-MSVC2022\\bin64;${env:PATH}" // Add ICU DLLs to PATH
+                }
+            ],
+            "console": "externalTerminal" // Use an external terminal for program output
+        }
+    ]
+}
