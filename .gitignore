@@ -1,0 +1,15 @@
+# Build artifacts
+*.obj
+*.exe
+*.pdb
+*.ilk
+*.log
+
+# VSCode settings
+.vscode/
+
+# Temporary files
+*.tmp
+*.log
+*.user
+*.ipch
