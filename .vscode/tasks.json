@@ -2,21 +2,25 @@
     "tasks": [
         {
             "type": "cppbuild",
-            "label": "C/C++: cl.exe build active file",
+            "label": "C/C++: cl.exe build active file (Debug)",
             "command": "cl.exe",
             "args": [
-                    "/std:c++20", // Use C++20 standard
-                    "/Zi",        // Generate debugging information
-                    "/DEBUG",     // Generate debugging symbols
-                    "/EHsc",      // Enable C++ exceptions
-                    "/nologo",    // Suppress logo output
-                    "/I", "C:\\ICU\\icu4c-77_1-Win64-MSVC2022\\include", // Add ICU include directory
-                    "/Fe${fileDirname}\\${fileBasenameNoExtension}.exe", // Output executable
-                    "${file}",    // Input source file
-                    "/link",      // Linker options
-                    "/LIBPATH:C:\\ICU\\icu4c-77_1-Win64-MSVC2022\\lib64", // Add ICU library directory
-                    "icuuc.lib",  // Link ICU common library
-                    "icuin.lib"   // Link ICU internationalization library
+                "/std:c++20", // Use C++20 standard
+                "/Zi",        // Generate debugging information
+                "/EHsc",      // Enable C++ exceptions
+                "/W4",        // Higher warning level
+                "/utf-8",     // Process source files as UTF-8
+                "/MP",        // Use multiple processors for compilation
+                "/nologo",    // Suppress logo output
+                "/Od",        // Disable optimizations for debugging
+                "/I", "C:\\ICU\\icu4c-77_1-Win64-MSVC2022\\include", // Add ICU include directory
+                "/Fe${fileDirname}\\${fileBasenameNoExtension}.exe", // Output executable
+                "${file}",    // Input source file
+                "/link",      // Linker options
+                "/DEBUG",     // Generate debugging symbols
+                "/LIBPATH:C:\\ICU\\icu4c-77_1-Win64-MSVC2022\\lib64", // Add ICU library directory
+                "icuuc.lib",  // Link ICU common library
+                "icuin.lib"   // Link ICU internationalization library
             ],
             "options": {
                 "cwd": "${fileDirname}"

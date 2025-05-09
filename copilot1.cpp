@@ -3,32 +3,17 @@
 #include <optional>
 #include <unicode/unistr.h> // ICU header for UnicodeString
 
-// Helper function to convert UTF-32 to UTF-16
-std::u16string ConvertUTF32ToUTF16(const std::u32string& input) {
-    std::u16string utf16_string;
-    for (char32_t ch : input) {
-        if (ch <= 0xFFFF) {
-            utf16_string.push_back(static_cast<char16_t>(ch));
-        } else if (ch <= 0x10FFFF) {
-            char16_t high_surrogate = static_cast<char16_t>(0xD800 + ((ch - 0x10000) >> 10));
-            char16_t low_surrogate = static_cast<char16_t>(0xDC00 + ((ch - 0x10000) & 0x3FF));
-            utf16_string.push_back(high_surrogate);
-            utf16_string.push_back(low_surrogate);
-        } else {
-            throw std::runtime_error("Invalid UTF-32 character detected.");
-        }
-    }
-    return utf16_string;
-}
-
 // Function to convert UTF-32 string to UTF-8 string using ICU
 std::optional<std::string> ConvertUTF32ToUTF8(const std::u32string& input) {
     try {
-        // Convert UTF-32 to UTF-16
-        std::u16string utf16_string = ConvertUTF32ToUTF16(input);
-
-        // Convert UTF-16 to ICU's UnicodeString
-        icu::UnicodeString unicode_string(reinterpret_cast<const UChar*>(utf16_string.data()), utf16_string.size());
+        // Use ICU's UnicodeString directly with UTF-32 code points
+        // This eliminates the need for manual UTF-16 conversion
+        icu::UnicodeString unicode_string;
+        for (const char32_t ch : input) {
+            // Append each code point directly to the UnicodeString
+            // UnicodeString.append() handles proper UTF-16 encoding internally
+            unicode_string.append(static_cast<UChar32>(ch));
+        }
 
         // Convert UnicodeString to UTF-8
         std::string utf8_string;
@@ -42,11 +27,10 @@ std::optional<std::string> ConvertUTF32ToUTF8(const std::u32string& input) {
 }
 
 int main() {
-    std::cout << "Starting Conversion"  << std::endl;
+    std::cout << "Starting Conversion" << std::endl;
 
     // Test strings in UTF-32
-    
-    std::u32string test_strings[] = {
+    const std::u32string test_strings[] = {
         U"Hello, World!",                  // Basic ASCII
         U"こんにちは世界",                  // Japanese (Hello, World)
         U"Привет, мир!",                  // Russian (Hello, World)
@@ -62,7 +46,7 @@ int main() {
     // Iterate through test strings and attempt conversion
     for (size_t i = 0; i < std::size(test_strings); ++i) {
         std::cout << "Test " << i + 1 << ": ";
-        auto result = ConvertUTF32ToUTF8(test_strings[i]);
+        const auto result = ConvertUTF32ToUTF8(test_strings[i]);
         if (result) {
             std::cout << "Conversion successful: " << result.value() << std::endl;
         } else {
@@ -70,6 +54,6 @@ int main() {
         }
     }
 
-    std::cout << "Conversion Complete"  << std::endl;
+    std::cout << "Conversion Complete" << std::endl;
     return 0;
 }
