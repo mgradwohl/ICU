@@ -13,12 +13,12 @@
                 "/MP",        // Use multiple processors for compilation
                 "/nologo",    // Suppress logo output
                 "/Od",        // Disable optimizations for debugging
-                "/I", "C:\\ICU\\icu4c-77_1-Win64-MSVC2022\\include", // Add ICU include directory
+                "/I", "C:\\ICU\\include", // Add ICU include directory
                 "/Fe${fileDirname}\\${fileBasenameNoExtension}.exe", // Output executable
                 "${file}",    // Input source file
                 "/link",      // Linker options
                 "/DEBUG",     // Generate debugging symbols
-                "/LIBPATH:C:\\ICU\\icu4c-77_1-Win64-MSVC2022\\lib64", // Add ICU library directory
+                "/LIBPATH:C:\\ICU\\lib64", // Add ICU library directory
                 "icuuc.lib",  // Link ICU common library
                 "icuin.lib"   // Link ICU internationalization library
             ],

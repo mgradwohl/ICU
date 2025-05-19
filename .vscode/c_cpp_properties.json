@@ -4,7 +4,7 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "C:/ICU/icu4c-77_1-Win64-MSVC2022/include"
+                "C:/ICU/include"
             ],
             "defines": [
                 "_DEBUG",

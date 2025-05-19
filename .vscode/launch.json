@@ -12,7 +12,7 @@
             "environment": [
                 {
                     "name": "PATH",
-                    "value": "C:\\ICU\\icu4c-77_1-Win64-MSVC2022\\bin64;${env:PATH}" // Add ICU DLLs to PATH
+                    "value": "C:\\ICU\\bin64;${env:PATH}" // Add ICU DLLs to PATH
                 }
             ],
             "console": "externalTerminal" // Use an external terminal for program output
@@ -28,7 +28,7 @@
             "environment": [
                 {
                     "name": "PATH",
-                    "value": "C:\\ICU\\icu4c-77_1-Win64-MSVC2022\\bin64;${env:PATH}"
+                    "value": "C:\\ICU\\bin64;${env:PATH}"
                 }
             ],
             "console": "externalTerminal"
